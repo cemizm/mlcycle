@@ -1,0 +1,1 @@
+docker-compose run frontend.dev /bin/bash

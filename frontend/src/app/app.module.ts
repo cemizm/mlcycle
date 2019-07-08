@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { TestComponent } from './test/test.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {AngularModuleLibModule} from './angular-module-lib.module'
+import {MaterialModule} from './material.module'
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import {AngularModuleLibModule} from './angular-module-lib.module'
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AngularModuleLibModule
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

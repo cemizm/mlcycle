@@ -1,1 +1,1 @@
-docker-compose up --build frontend.dev
+docker-compose up --build backend.dev frontend.dev

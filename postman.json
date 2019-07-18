@@ -1,0 +1,888 @@
+{
+	"info": {
+		"_postman_id": "c1e98962-16bc-48a9-ada5-12d699390789",
+		"name": "ContinousLearningPipeline",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Workers",
+			"item": [
+				{
+					"name": "GetAll",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/workers",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"workers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/workers/803ddb3a-f5a9-4ed8-bf63-dcda46ce84fa",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"workers",
+								"803ddb3a-f5a9-4ed8-bf63-dcda46ce84fa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Worker 1\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/workers",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"workers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Mein Worker\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/workers/803ddb3a-f5a9-4ed8-bf63-dcda46ce84fa",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"workers",
+								"803ddb3a-f5a9-4ed8-bf63-dcda46ce84fa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/workers/803ddb3a-f5a9-4ed8-bf63-dcda46ce84fa",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"workers",
+								"803ddb3a-f5a9-4ed8-bf63-dcda46ce84fa"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "GetAll",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ec021c10-acd5-4545-9380-f41235516f81",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.variables.set(\"project\", jsonData[0].id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/projects",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/projects/{{project}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"{{project}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Project 1\",\n\t\"gitrepository\": \"https://github.com/cemizm/tf-benchmark-gpu.git\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/projects",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Mein Project 1\",\n\t\"gitrepository\": \"https://github.com/cemizm/tf-benchmark-gpu.git\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/projects/{{project}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"{{project}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/projects/4240fb4f-d5f9-4afc-9cdc-b688ade5b759",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"4240fb4f-d5f9-4afc-9cdc-b688ade5b759"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Jobs",
+			"item": [
+				{
+					"name": "GetAll",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2326dd24-bb33-4ce1-82e7-db7cee5e5c90",
+								"exec": [
+									"if(pm.response.code == 200)",
+									"{",
+									"    var jsonData = pm.response.json();",
+									"    pm.variables.set(\"job\", jsonData.Id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/jobs",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2326dd24-bb33-4ce1-82e7-db7cee5e5c90",
+								"exec": [
+									"if(pm.response.code == 200)",
+									"{",
+									"    var jsonData = pm.response.json();",
+									"    pm.variables.set(\"job\", jsonData.Id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/jobs/{{job}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"jobs",
+								"{{job}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AppendSteps",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2326dd24-bb33-4ce1-82e7-db7cee5e5c90",
+								"exec": [
+									"if(pm.response.code == 200)",
+									"{",
+									"    var jsonData = pm.response.json();",
+									"    pm.variables.set(\"job\", jsonData.Id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{\n\t\t\"Name\": \"Test\"\n\t},\n\t{\n\t\t\"Name\": \"Test2\"\n\t}\n]"
+						},
+						"url": {
+							"raw": "{{host}}/api/jobs/{{job}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"jobs",
+								"{{job}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Trigger",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2326dd24-bb33-4ce1-82e7-db7cee5e5c90",
+								"exec": [
+									"if(pm.response.code == 200)",
+									"{",
+									"    var jsonData = pm.response.json();",
+									"    pm.variables.set(\"job\", jsonData.Id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/jobs/project/{{project}}/trigger",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"jobs",
+								"project",
+								"{{project}}",
+								"trigger"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Scheduler",
+			"item": [
+				{
+					"name": "Pending",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/scheduler/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"scheduler",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Claim",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/scheduler/{{job}}/step/{{step}}/claim",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"scheduler",
+								"{{job}}",
+								"step",
+								"{{step}}",
+								"claim"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Complete",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Test1\": \"Gut\",\n\t\"Test2\": \"Besser\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/scheduler/{{job}}/step/{{step}}/complete",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"scheduler",
+								"{{job}}",
+								"step",
+								"{{step}}",
+								"complete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Fragments",
+			"item": [
+				{
+					"name": "GetAllByJob",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/fragments/job/{{job}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"fragments",
+								"job",
+								"{{job}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllByStep",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/fragments/job/{{job}}/step/{{step}}/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"fragments",
+								"job",
+								"{{job}}",
+								"step",
+								"{{step}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetLatestByJob",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/fragments/job/{{job}}/name/file1.jpg",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"fragments",
+								"job",
+								"{{job}}",
+								"name",
+								"file1.jpg"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetLatestByProject",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/fragments/project/{{project}}/name/file1.jpg",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"fragments",
+								"project",
+								"{{project}}",
+								"name",
+								"file1.jpg"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/fragments/d7d274e6-2775-4451-a834-69b3c41609be",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"fragments",
+								"d7d274e6-2775-4451-a834-69b3c41609be"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Name",
+									"value": "Project 1 File 1",
+									"type": "text"
+								},
+								{
+									"key": "Filename",
+									"value": "file1.jpg",
+									"type": "text"
+								},
+								{
+									"key": "Type",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "BinaryData",
+									"type": "file",
+									"src": ""
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/api/fragments/job/{{job}}/step/{{step}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"fragments",
+								"job",
+								"{{job}}",
+								"step",
+								"{{step}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "477ec612-01ad-4549-b14f-98da5a81c0f9",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "4ce450c7-26e1-46ef-aee3-d4214fe650cc",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "138fb623-a003-4fa8-b967-32fc818994db",
+			"key": "host",
+			"value": "https://localhost:5001",
+			"type": "string"
+		},
+		{
+			"id": "92d37a18-cac8-45a9-ae77-df9474f50292",
+			"key": "project",
+			"value": "ee47ab99-d662-44f5-b92d-8e80d281ac49",
+			"type": "string"
+		},
+		{
+			"id": "ebe9af31-b68a-418c-960e-6072861a8f0d",
+			"key": "job",
+			"value": "ff6f84f3-3a19-4ab5-8b58-ad74b56584ae",
+			"type": "string"
+		},
+		{
+			"id": "da377b08-79e8-4206-a627-cd6858bfb7ba",
+			"key": "step",
+			"value": "0",
+			"type": "string"
+		}
+	]
+}

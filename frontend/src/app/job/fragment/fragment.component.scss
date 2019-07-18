@@ -1,0 +1,43 @@
+.preview {
+    height: 100%;
+    width: 100%;
+
+    .container {
+        height: 100%;
+        width: 100%;
+        padding: 3px;
+
+        position: relative;
+        border: 1px dashed lightgray;
+
+        .mat-mini-fab {
+            margin: -10px;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            
+            object-fit: contain;
+        }
+
+        pre {
+            overflow: scroll;
+
+            width: 100%;
+            height: 100%;
+
+            margin: 0px;
+        }
+
+        app-fragment-table {
+            width: 100%;
+            height: 100%;
+            
+            overflow: scroll;
+        }
+    }
+}

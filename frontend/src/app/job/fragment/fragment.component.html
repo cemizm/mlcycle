@@ -1,0 +1,17 @@
+<div fxFlex class="preview" fxLayout="column">
+    <div fxFlex class="container" fxLayoutAlign="center center">
+        <span *ngIf="!fragment">Kein Dokument gewählt</span>
+
+        <span *ngIf="isActive(0)">Keine Vorschau verfügbar</span>
+        <img *ngIf="isActive(1)" [src]="getUrl()">
+        <app-fragment-table *ngIf="isActive(2)" fxFlex [content]="content" fxFlexAlign="start"></app-fragment-table>
+        <pre *ngIf="isActive(3)">{{content}}</pre>
+        
+        <a *ngIf="fragment" [href]="getUrl()" target="_blank" mat-mini-fab color="primary">
+            <mat-icon>cloud_download</mat-icon>
+        </a>
+
+        <mat-spinner *ngIf="loading"></mat-spinner>
+
+    </div>
+</div>

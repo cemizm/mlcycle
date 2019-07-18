@@ -1,0 +1,21 @@
+.step {
+    margin-top: 10px;
+    min-height: 500px;
+    max-height: 500px;
+    height: 500px;
+    
+    .files {
+        .mat-action-list {
+            height: 500px;
+            overflow-y: scroll;
+            padding: 0px;
+
+            .selected {
+                background-color: lightblue;
+            }
+        }
+    }
+    app-fragment {
+        height: 100%;
+    }
+}

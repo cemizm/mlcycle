@@ -1,0 +1,57 @@
+<div fxLayout="column" fxLayoutGap="15px">
+    <mat-card class="filter">
+        <mat-card-title>
+            Filter
+        </mat-card-title>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px">
+            <mat-form-field fxFlex>
+                <mat-label>Status</mat-label>
+                <mat-select placeholder="Status" [(value)]="state" (selectionChange)="updateJobs()">
+                    <mat-option [value]="null">Alle</mat-option>
+                    <mat-option *ngFor="let item of states" [value]="item.key">{{item.value}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field fxFlex>
+                <mat-label>Projekt</mat-label>
+                <mat-select placeholder="Projekt" [(value)]="project" (selectionChange)="updateJobs()">
+                    <mat-option [value]="null">Alle</mat-option>
+                    <mat-option *ngFor="let project of projects" [value]="project">{{project.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </mat-card>
+
+    <mat-card *ngFor="let job of jobs">
+
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" class="project" [routerLink]="['/job', job.id]">
+            <div fxFlex fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center center" class="head">
+                <app-state-icon [state]="job.state"></app-state-icon>
+                <div fxFlex fxLayout="column">
+                    <a class="title">{{job.project?.name}}</a>
+                    <span>erstellt {{job.created | amLocal | amTimeAgo}}</span>
+                </div>
+            </div>
+            <div fxLayout="column" fxShow="true" fxHide.xs="true" fxLayoutAlign="center end">
+                <span>Status: {{job.state | pstate}}</span>
+                <span>{{job.state == 2 ? 'in' : 'seit'}} {{job.created | diff:job.finished | amDuration:'seconds'}}</span>
+            </div>
+        </div>
+
+        <div class="details" *ngIf="job.steps.length > 1">
+            <mat-divider></mat-divider>
+
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" class="steps" fxLayoutAlign.gt-xs="start center">
+                <ng-container *ngFor="let step of job.steps">
+                    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px" fxLayoutGap.xs="15px">
+                        <app-state-icon [state]="step.state"></app-state-icon>
+                        <span class="title" [ngClass]="{'active': step.state == 1 || step.state == 21, 'inactive': step.state == 0}">{{step.name}}</span>
+                    </div>
+                    <div fxFlex *ngIf="job.steps.length > job.steps.indexOf(step) + 1" [ngClass]="{'done': step.state == 2}">
+                        <div class="connect" fxShow="true" fxHide.xs="true"></div>
+                        <div class="connect-vert" fxHide="true" fxShow.xs="true"></div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </mat-card>
+</div>

@@ -1,0 +1,39 @@
+.mat-toolbar {
+    position: fixed;
+    z-index: 2;
+    
+    .fill {
+        flex: 1 1 auto;
+    }
+
+    .subLine {
+        margin-left:  5px;
+        font-size: 14px;
+    }
+}
+
+.mat-sidenav-container {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    height: 100%;
+    
+    .mat-sidenav {
+        padding-top: 60px;
+        width: 100%;
+    }
+
+    .mat-sidenav-content {
+        flex: 1 1 auto;
+        padding: 30px 15px;
+    }
+}
+
+.mat-list-item.active {
+    background-color: #ffffff20;
+    font-weight: bolder;
+}
+
+.mat-button.active {
+    background-color: #ffffff20;
+    font-weight: bolder;
+}

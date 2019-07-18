@@ -1,9 +1,33 @@
-<mat-toolbar color="primary">
-  <span>ML-Pipeline Scheduler</span>
-  <span style="flex: 1 1 auto"></span>
-  <button mat-button>Jobs</button>
-  <button mat-button>Projects</button>
-  <button mat-button>Workers</button>
+<mat-toolbar color="primary" class="mat-elevation-z8">
+
+  <div fxShow="true" fxHide.gt-xs="true">
+    <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+
+  <span>MLCycle</span>
+
+  <span class="fill"></span>
+  
+  <div fxShow="true" fxHide.xs="true">
+    <a mat-button routerLink="/job" routerLinkActive="active">Jobs</a>
+    <a mat-button routerLink="/project" routerLinkActive="active">Projekte</a>
+    <a mat-button routerLink="/worker" routerLinkActive="active">Worker</a>
+  </div>
+  
+
 </mat-toolbar>
 
-<router-outlet></router-outlet>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+        <a mat-list-item routerLink="/job" routerLinkActive="active">Jobs</a>
+        <a mat-list-item routerLink="/project" routerLinkActive="active">Projekte</a>
+        <a mat-list-item routerLink="/worker" routerLinkActive="active">Worker</a>
+      </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="mat-typography">
+      <router-outlet (activate)='sidenav.close()'></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

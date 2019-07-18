@@ -1,0 +1,28 @@
+<mat-expansion-panel>
+    <mat-expansion-panel-header fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center center">
+        <div fxFlex fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px" fxLayoutGap.xs="15px">
+            <app-state-icon [state]="step.state"></app-state-icon>
+            <span class="title" [ngClass]="{'active': step.state == 1 || step.state == 21, 'inactive': step.state == 0}">{{step.name}}</span>
+        </div>
+        <span *ngIf="step.start">{{step.state == 2 ? 'in' : 'seit'}} {{step.start | diff:step.end | amDuration:'seconds'}}</span>
+    </mat-expansion-panel-header>
+    <mat-divider></mat-divider>
+    <div fxLayout="row" fxLayoutAlign="start start" class="step" fxLayoutGap="15px">
+        <div fxFlex="33%" class="files">
+            <mat-action-list>
+                <mat-list-item mat-button *ngIf="!step.fragments || step.fragments.length == 0">
+                    <h3 matLine> Keine Dokumente vorhanden </h3>
+                </mat-list-item>
+                <ng-container *ngFor="let fragment of step.fragments" >
+                    <mat-list-item mat-button (click)="showFragment(fragment)" [ngClass]="{'selected': selectedFragment == fragment}">
+                        <mat-icon matListIcon>{{fragment.type == 0 ? 'timeline' : fragment.type == 1 ? 'reorder' : 'folder_special'}}</mat-icon>
+                        <h3 matLine> {{fragment.name}} </h3>
+                        <p matLine>{{fragment.created | amLocal | amTimeAgo}}</p>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                </ng-container>
+            </mat-action-list>
+        </div>
+        <app-fragment fxFlex="67%" [fragment]="selectedFragment"></app-fragment>
+    </div>
+</mat-expansion-panel>

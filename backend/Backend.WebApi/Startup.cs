@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Backend.DataLayer;
+using Backend.DataLayer.MongoDB;
+using Backend.WebApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 
 namespace Backend.WebApi
 {
@@ -25,7 +29,29 @@ namespace Backend.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddCors(o => o.AddPolicy("AllPolicy", builder =>
+            {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+            }));
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                             .AddJsonOptions(options => { 
+                                    options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore; 
+                                 });
+            
+            services.AddSingleton<SyncService>(new SyncService());
+            services.AddSingleton<LongPollingService>(new LongPollingService());
+
+            services.AddSingleton<MongoSettings>(Configuration.GetSection("Mongo").Get<MongoSettings>());
+                        
+            services.AddTransient<IWorkerService, WorkerService>();
+            services.AddTransient<IProjectService, ProjectService>();
+            services.AddTransient<IJobService, JobService>();
+            services.AddTransient<IFragmentService, FragmentService>();
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +66,8 @@ namespace Backend.WebApi
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseCors("AllPolicy");
 
             app.UseHttpsRedirection();
             app.UseMvc();

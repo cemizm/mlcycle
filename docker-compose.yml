@@ -12,19 +12,28 @@ services:
       - '/app/node_modules'
     ports:
       - 4200:4200
+    command: sleep infinity
+
   backend.dev:
     container_name: backend.dev
+    depends_on: 
+      - mongo
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
     working_dir: /app
     volumes:
       - './backend:/app'
-      - '/app/Backend.DataLayer/bin/'
-      - '/app/Backend.DataLayer/obj/'
-      - '/app/Backend.DataLayer.MongoDB/bin/'
-      - '/app/Backend.DataLayer.MongoDB/obj/'
-      - '/app/Backend.WebApi/bin/'
-      - '/app/Backend.WebApi/obj/'
     ports:
       - 5000:5000
       - 5001:5001
-    command: /bin/bash -c ./watch.sh
+    command: sleep infinity
+  
+  mongo-express:
+    image: mongo-express
+    depends_on: 
+      - mongo
+    ports:
+      - 8081:8081
+
+  mongo:
+    image: mongo
+

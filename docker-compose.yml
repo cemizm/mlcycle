@@ -28,6 +28,7 @@ services:
     command: sleep infinity
   
   mongo-express:
+    container_name: mongo-express
     image: mongo-express
     depends_on: 
       - mongo
@@ -35,5 +36,6 @@ services:
       - 8081:8081
 
   mongo:
+    container_name: mongo
     image: mongo
 

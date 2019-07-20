@@ -87,7 +87,18 @@ namespace Backend.WebApi.Controllers
         }
 
         [HttpPost("{id}/step/{number}/complete")]
-        public async Task<ActionResult> Complete(Guid id, int number, [FromBody]Dictionary<string, object> metrics)
+        public async Task<ActionResult> Complete(Guid id, int number)
+        {
+            return await Finish(id, number);
+        }
+
+        [HttpPost("{id}/step/{number}/error")]
+        public async Task<ActionResult> Error(Guid id, int number)
+        {
+            return await Finish(id, number, true);
+        }
+
+        private async Task<ActionResult> Finish(Guid id, int number, bool error=false)
         {
             if(id == Guid.Empty)
                 return BadRequest();
@@ -107,15 +118,16 @@ namespace Backend.WebApi.Controllers
                 if(current.State != ProcessingState.InProgress)
                     return StatusCode(406, "Step is not in progress");
                 
-                current.State = ProcessingState.Done;
+                current.State = error ? ProcessingState.Error : ProcessingState.Done;
                 current.End = DateTime.UtcNow;
-                current.Metrics = metrics;
 
-                next = job.Steps.Find(s => s.Number == current.Number + 1);
+                if(!error)
+                    next = job.Steps.Find(s => s.Number == current.Number + 1);
+
                 if(next == null)
                 {
                     job.Finished = DateTime.UtcNow;
-                    job.State = ProcessingState.Done;
+                    job.State = current.State;
                 }
                 else
                     next.State = ProcessingState.Scheduled;

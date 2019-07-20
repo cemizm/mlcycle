@@ -60,7 +60,7 @@ namespace Backend.WebApi.Controllers
             return Ok(tmp);
         }
 
-        [HttpPost("{id}")]
+        [HttpPost("{id}/steps")]
         public async Task<IActionResult> Append(Guid id, [FromBody]List<StepModel> models)
         {
             if(id == Guid.Empty)
@@ -95,6 +95,41 @@ namespace Backend.WebApi.Controllers
             return Ok(job);
         }
 
+        [HttpPost("{id}/step/{number}/metrics")]
+        public async Task<IActionResult> Append(Guid id, int number, [FromBody]Dictionary<string, object> metrics)
+        {
+            if(id == Guid.Empty)
+                return BadRequest();
+            
+            if(metrics == null || metrics.Count() == 0)
+                return BadRequest();
+
+            Job job = null;
+            using(await syncService.GetLockObject(SyncService.Job))
+            {
+                job = await jobService.GetById(id);
+                if(job == null)
+                    return NotFound();
+
+                Step current = job.Steps.Find(s => s.Number == number);
+                if(current == null)
+                    return NotFound("Step not found");
+
+                if(current.State != ProcessingState.InProgress)
+                    return StatusCode(406, "Step is not in progress");
+                
+                if(current.Metrics == null)
+                    current.Metrics = new Dictionary<string, object>();
+
+                foreach(var key in metrics.Keys)
+                    current.Metrics[key] = metrics[key];
+
+                await jobService.Update(id, job);
+            }
+
+            return Ok(job);
+        }
+
         [HttpPost("project/{projectId}/trigger")]
         public async Task<ActionResult> TriggerBuild(Guid projectId, JobInitiator initiator)
         {
@@ -105,7 +140,9 @@ namespace Backend.WebApi.Controllers
             if(project == null)
                 return NotFound();
 
-            IEnumerable<Job> jobs = await jobService.GetBy(t=>t.ProjectId == projectId && t.State != ProcessingState.Done);
+            IEnumerable<Job> jobs = await jobService.GetBy(t => t.ProjectId == projectId && 
+                                                                t.State != ProcessingState.Done && 
+                                                                t.State != ProcessingState.Error);
             if(jobs.Count() > 0)
                 return new StatusCodeResult(503);
             

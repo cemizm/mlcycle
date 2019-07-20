@@ -14,6 +14,8 @@ export class ProcessingStatePipe implements PipeTransform {
       return "Abgeschlossen";
     if(value == 21)
       return "Eingereiht";
+    if(value == 31)
+      return "Fehler";
   }
 
 }

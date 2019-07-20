@@ -40,6 +40,11 @@ namespace Backend.DataLayer.Models
         /// Step is scheduled for beeing processed  next
         /// </summary>
         Scheduled = 21,
+
+        /// <summary>
+        /// An error occured while processing the Job/step
+        /// </summary>
+        Error = 31,
     }
 
     public enum FragmentType

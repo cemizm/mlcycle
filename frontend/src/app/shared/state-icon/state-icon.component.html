@@ -1,1 +1,1 @@
-<mat-icon fxFlex [ngClass]="{'created': state == 0, 'inprogress': state == 1 || state == 21, 'done': state == 2}">{{state == 2 ? 'done' : state == 1 ? 'cached' : 'query_builder'}}</mat-icon>
+<mat-icon fxFlex [ngClass]="{'created': state == 0, 'inprogress': state == 1 || state == 21, 'done': state == 2, 'error': state == 31}">{{state == 2 ? 'done' : state == 1 ? 'cached' : state == 31 ? 'error' : 'query_builder'}}</mat-icon>

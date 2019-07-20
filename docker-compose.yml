@@ -3,6 +3,8 @@ version: '3'
 services:
   frontend.dev:
     container_name: frontend.dev
+    depends_on: 
+      - mongo
     image: frontend:dev
     build: 
       context: ./frontend
@@ -12,7 +14,7 @@ services:
       - '/app/node_modules'
     ports:
       - 4200:4200
-    command: sleep infinity
+    command: npm start
 
   backend.dev:
     container_name: backend.dev
@@ -25,7 +27,7 @@ services:
     ports:
       - 5000:5000
       - 5001:5001
-    command: sleep infinity
+    command: dotnet run --project Backend.WebApi
   
   mongo-express:
     container_name: mongo-express

@@ -1,1 +1,1 @@
-docker-compose up --build backend.dev frontend.dev
+docker-compose run -d --service-ports --name frontend.dev frontend.dev /bin/sleep infinity

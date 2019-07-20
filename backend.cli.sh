@@ -1,1 +1,0 @@
-docker-compose run backend.dev /bin/bash

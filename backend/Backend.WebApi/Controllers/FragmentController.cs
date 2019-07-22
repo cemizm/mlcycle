@@ -108,13 +108,13 @@ namespace Backend.WebApi.Controllers
         public async Task<IActionResult> Upload(Guid jobId, int number, [FromForm]FragmentUpload upload)
         {
             if(jobId == Guid.Empty)
-                return BadRequest();
+                return BadRequest("jobId not set");
 
             if(string.IsNullOrEmpty(upload.Filename))
-                return BadRequest();
+                return BadRequest("filename not set");
 
             if(string.IsNullOrEmpty(upload.Name))
-                return BadRequest();
+                return BadRequest("name not set");
 
             var job = await jobService.GetById(jobId);
             if(job == null)

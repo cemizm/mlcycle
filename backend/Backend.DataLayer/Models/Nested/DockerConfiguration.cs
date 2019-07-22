@@ -8,8 +8,6 @@ namespace Backend.DataLayer.Models
 
         public DockerBuildConfiguration BuildConfiguration { get; set; }
 
-        public string MountTarget { get; set; }
-
         public string Command { get; set; }
         
         public Dictionary<string, object> Properties { get; set; }

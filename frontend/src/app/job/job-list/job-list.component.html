@@ -33,7 +33,7 @@
             </div>
             <div fxLayout="column" fxShow="true" fxHide.xs="true" fxLayoutAlign="center end">
                 <span>Status: {{job.state | pstate}}</span>
-                <span>{{job.state == 2 ? 'in' : 'seit'}} {{job.created | diff:job.finished | amDuration:'seconds'}}</span>
+                <span>{{job.state == 2 || job.state == 31 ? 'in' : 'seit'}} {{job.created | diff:job.finished | amDuration:'seconds'}}</span>
             </div>
         </div>
 

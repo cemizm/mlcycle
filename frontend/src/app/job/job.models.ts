@@ -5,7 +5,8 @@ export enum ProcessingState
     Created = 0,
     InProgress = 1,
     Done = 2,
-    Scheduled = 21
+    Scheduled = 21,
+    Error = 31
 }
 
 export enum Initiator
@@ -37,14 +38,15 @@ export interface Step
     number:number,
     start:Date,
     end:Date,
-    state: ProcessingState
+    state: ProcessingState,
+    metrics: {[key:string]: any; }
 }
 
-export interface Job 
+export interface Job
 {
     id: string,
     created: Date,
-    finished: Date, 
+    finished: Date,
     state: ProcessingState,
     initiator: Initiator,
     project: Project,

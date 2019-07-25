@@ -23,18 +23,8 @@
 
     <mat-card *ngFor="let job of jobs">
 
-        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" class="project" [routerLink]="['/job', job.id]">
-            <div fxFlex fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center center" class="head">
-                <app-state-icon [state]="job.state"></app-state-icon>
-                <div fxFlex fxLayout="column">
-                    <a class="title">{{job.project?.name}}</a>
-                    <span>erstellt {{job.created | amLocal | amTimeAgo}}</span>
-                </div>
-            </div>
-            <div fxLayout="column" fxShow="true" fxHide.xs="true" fxLayoutAlign="center end">
-                <span>Status: {{job.state | pstate}}</span>
-                <span>{{job.state == 2 || job.state == 31 ? 'in' : 'seit'}} {{job.created | diff:job.finished | amDuration:'seconds'}}</span>
-            </div>
+        <div [routerLink]="['/job', job.id]">
+            <app-job-header [job]="job"></app-job-header>
         </div>
 
         <div class="details" *ngIf="job.steps.length > 1">

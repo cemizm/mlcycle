@@ -194,6 +194,7 @@ namespace Backend.WebApi.Controllers
                          End = step.End,
                          State = step.State,
                          Docker = step.Docker,
+                         Metrics = step.Metrics,
                          Fragments = fragments
             };
         }

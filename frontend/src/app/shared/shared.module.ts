@@ -4,7 +4,7 @@ import { MaterialModule } from './material.module';
 import { ProcessingStatePipe } from './processing-state.pipe';
 import { StateIconComponent } from './state-icon/state-icon.component';
 import { DiffPipe } from './diff.pipe';
-
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -15,13 +15,15 @@ import { DiffPipe } from './diff.pipe';
   ],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    ChartsModule
   ],
   exports: [
     MaterialModule,
     ProcessingStatePipe,
     DiffPipe,
     StateIconComponent,
+    ChartsModule
   ]
 })
 export class SharedModule { }

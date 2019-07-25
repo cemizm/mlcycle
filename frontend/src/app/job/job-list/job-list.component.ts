@@ -21,7 +21,7 @@ export class JobListComponent implements OnInit {
 
   private jobs:Array<Job>;
 
-  constructor(private jobService:JobService) { 
+  constructor(private jobService:JobService) {
     this.projects = new Array<Project>();
 
     this.state = null;
@@ -31,12 +31,13 @@ export class JobListComponent implements OnInit {
     this.states.push({key: ProcessingState.Created, value: "Erstellt"});
     this.states.push({key: ProcessingState.InProgress, value: "In Bearbeitung"});
     this.states.push({key: ProcessingState.Done, value: "Abgeschlossen"});
+    this.states.push({key: ProcessingState.Error, value: "Fehler"});
   }
 
   ngOnInit() {
     this.jobService.getAll().subscribe(res => {
       this.allJobs = res;
-      
+
       this.allJobs.forEach((j) => {
         let project = this.projects.find(p => p.id == j.project.id);
         if(project == null)
@@ -58,7 +59,7 @@ export class JobListComponent implements OnInit {
 
       return true;
     });
-    
+
     this.jobs = tmp.sort((a, b) => {
       if(a.created > b.created)
         return -1;

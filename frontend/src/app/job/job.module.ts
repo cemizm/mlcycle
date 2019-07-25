@@ -10,12 +10,14 @@ import { JobComponent } from './job/job.component';
 import { StepComponent } from './step/step.component';
 import { FragmentComponent } from './fragment/fragment.component';
 import { FragmentTableComponent } from './fragment-table/fragment-table.component';
+import { JobHeaderComponent } from './job-header/job-header.component';
 
 
 @NgModule({
   declarations: [
     JobListComponent, 
     JobComponent, 
+    JobHeaderComponent,
     StepComponent, 
     FragmentComponent,
     FragmentTableComponent

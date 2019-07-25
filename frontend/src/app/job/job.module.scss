@@ -1,36 +1,8 @@
-.project {
-    .title {
-        font-size: 16px;
-        font-weight: bold;
-    }
+.active {
+    font-weight: bold;
+
 }
 
-.details {
-
-    .active {
-        font-weight: bold;
-    }
-
-    .inactive {
-        color: gray;
-    }
-    
-    .steps {
-        padding-top: 10px;
-    }
-
-    .connect-vert {
-        min-height: 15px;
-        margin-left: 10px;
-        border-left: 2px dashed lightgray;
-    }
-
-    .connect {
-        border-bottom: 2px dashed lightgray;
-    }
-
-    .done > div {
-        border-color: black;
-    }
-
+.inactive {
+    color: gray;
 }

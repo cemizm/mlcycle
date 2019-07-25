@@ -1,15 +1,35 @@
 <div fxLayout="column" fxLayoutGap="15px" *ngIf="job">
-    <mat-card class="project">
-        <div fxFlex fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start center">
-            <app-state-icon [state]="job.state"></app-state-icon>
-            <div fxFlex fxLayout="column">
-                <a class="title">{{job.project?.name}}</a>
-                <span>erstellt {{job.created | amLocal | amTimeAgo}}</span>
-            </div>
-        </div>
-        <div fxLayout="column" fxShow="true" fxHide.xs="true" fxLayoutAlign="center end">
-            <span>Status: {{job.state | pstate}}</span>
-            <span>{{job.state == 2 || job.state == 31 ? 'in' : 'seit'}} {{job.created | diff:job.finished | amDuration:'seconds'}}</span>
+    <mat-card>
+        <app-job-header [job]="job"></app-job-header>
+        <mat-divider></mat-divider>
+        <div fxLayout="row" fxLayout.xs="column" class="props">
+          <div fxFlex.gt-xs="50%">
+            <canvas baseChart options="maintainAspectRatio=false"
+              [data]="time_data"
+              [labels]="time_labels"
+              [chartType]="chartType" 
+              [colors]="chartColors"
+              [options]="chartOptions">
+            </canvas>
+          </div>
+          <div fxFlex class="metrics">
+              <table>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Wert</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let metric of metrics">
+                    <th>{{metric.step}}</th>
+                    <td>{{metric.name}}</td>
+                    <td>{{metric.value}}</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
         </div>
     </mat-card>
     <h3>Pipeline</h3>

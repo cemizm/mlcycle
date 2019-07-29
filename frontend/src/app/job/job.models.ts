@@ -40,6 +40,7 @@ export interface Step
     end:Date,
     state: ProcessingState,
     metrics: {[key:string]: any; }
+    fragments: Fragment[]
 }
 
 export interface Job

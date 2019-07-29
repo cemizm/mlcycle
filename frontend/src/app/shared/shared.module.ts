@@ -5,6 +5,7 @@ import { ProcessingStatePipe } from './processing-state.pipe';
 import { StateIconComponent } from './state-icon/state-icon.component';
 import { DiffPipe } from './diff.pipe';
 import { ChartsModule } from 'ng2-charts';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -16,14 +17,17 @@ import { ChartsModule } from 'ng2-charts';
   imports: [
     CommonModule,
     MaterialModule,
-    ChartsModule
+    ChartsModule,
+    ReactiveFormsModule
+
   ],
   exports: [
     MaterialModule,
     ProcessingStatePipe,
     DiffPipe,
     StateIconComponent,
-    ChartsModule
+    ChartsModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

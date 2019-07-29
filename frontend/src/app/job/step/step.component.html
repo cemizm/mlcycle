@@ -1,6 +1,6 @@
 <mat-expansion-panel>
     <mat-expansion-panel-header fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center center">
-        <div fxFlex fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px" fxLayoutGap.xs="15px">
+        <div fxFlex fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
             <app-state-icon [state]="step.state"></app-state-icon>
             <span class="title" [ngClass]="{'active': step.state == 1 || step.state == 21, 'inactive': step.state == 0}">{{step.name}}</span>
         </div>

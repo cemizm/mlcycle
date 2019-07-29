@@ -32,7 +32,7 @@
 
             <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" class="steps" fxLayoutAlign.gt-xs="start center">
                 <ng-container *ngFor="let step of job.steps">
-                    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px" fxLayoutGap.xs="15px">
+                    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
                         <app-state-icon [state]="step.state"></app-state-icon>
                         <span class="title" [ngClass]="{'active': step.state == 1 || step.state == 21, 'inactive': step.state == 0}">{{step.name}}</span>
                     </div>

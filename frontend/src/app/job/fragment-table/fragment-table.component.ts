@@ -10,7 +10,7 @@ export class FragmentTableComponent implements OnInit {
 
   constructor() { }
 
-  @Input()  
+  @Input()
   public set content(v : string) {
     let rows = v.split('\n');
     this.data = new Array<Array<string>>();
@@ -20,7 +20,7 @@ export class FragmentTableComponent implements OnInit {
     rows.forEach(row => {
       if(row.length == 0)
         return;
-        
+
       let cols = row.match(regex);
 
       let r = new Array<string>();
@@ -35,7 +35,7 @@ export class FragmentTableComponent implements OnInit {
       this.data.push(r);
     });
   }
-  
+
   ngOnInit() {
   }
 

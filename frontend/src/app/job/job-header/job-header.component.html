@@ -2,7 +2,7 @@
     <div fxFlex fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start center">
         <app-state-icon [state]="job.state"></app-state-icon>
         <div fxFlex fxLayout="column">
-            <a class="title">{{job.project?.name}}</a>
+            <a class="title">{{job.project ? job.project.name : "Gelöschtes Projekt"}}</a>
             <span>erstellt {{job.created | amLocal | amTimeAgo}}</span>
         </div>
     </div>

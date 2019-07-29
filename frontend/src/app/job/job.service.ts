@@ -18,8 +18,13 @@ export class JobService {
     return this.http.get<Array<Job>>(this.collection);
   }
 
-  getById(id: string):Observable<Job> 
+  getById(id: string):Observable<Job>
   {
     return this.http.get<Job>(this.collection + id);
+  }
+
+  trigger(id: string):Observable<Job>
+  {
+    return this.http.post<Job>(this.collection + 'project/' + id + '/trigger', null);
   }
 }

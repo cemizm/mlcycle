@@ -39,6 +39,9 @@ export class JobListComponent implements OnInit {
       this.allJobs = res;
 
       this.allJobs.forEach((j) => {
+        if(j.project == null)
+          return;
+
         let project = this.projects.find(p => p.id == j.project.id);
         if(project == null)
           this.projects.push(j.project);
@@ -54,7 +57,7 @@ export class JobListComponent implements OnInit {
       if(this.state != null && j.state != this.state)
         return false;
 
-      if(this.project != null && j.project.id != this.project.id)
+      if(this.project != null && (j.project == null || j.project.id != this.project.id))
         return false;
 
       return true;

@@ -6,7 +6,7 @@
             <span>erstellt {{job.created | amLocal | amTimeAgo}}</span>
         </div>
     </div>
-    <div fxLayout="column" fxShow="true" fxHide.xs="true" fxLayoutAlign="center end">
+    <div fxLayout="column" fxShow="true" fxHide.xs="true" fxLayoutAlign="center end" [ngClass]="{'blink': job.state == 21 || job.state == 1}">
         <span class="status">Status: {{job.state | pstate}}</span>
         <span>{{job.state == 2 || job.state == 31 ? 'in' : 'seit'}} {{job.created | diff:job.finished | amDuration:'seconds'}}</span>
     </div>

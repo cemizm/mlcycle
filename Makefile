@@ -1,3 +1,5 @@
+.DEFAULT_GOAL := scheduler
+
 .PHONY: backend.dev
 backend.dev:
 	docker-compose run -d --service-ports --name backend.dev backend /bin/sleep infinity
@@ -14,8 +16,8 @@ frontend.dev:
 backend.cli:
 	docker exec -it frontend.dev /bin/bash
 
-.PHONY: app
-app:
+.PHONY: scheduler
+scheduler:
 	docker-compose up -d --build backend frontend
 
 .PHONY: mongo-express

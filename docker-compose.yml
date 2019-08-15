@@ -1,14 +1,14 @@
 version: '3'
 
 services:
-  frontend.dev:
-    container_name: frontend.dev
+  frontend:
+    container_name: frontend
     depends_on: 
-      - mongo
-    image: frontend:dev
+      - backend
+    image: frontend
     build: 
       context: ./frontend
-      dockerfile: ../dockerfiles/frontend.dev.dockerfile
+      dockerfile: ../dockerfiles/frontend.dockerfile
     volumes:
       - './frontend:/app'
       - '/app/node_modules'
@@ -16,8 +16,8 @@ services:
       - 4200:4200
     command: npm start
 
-  backend.dev:
-    container_name: backend.dev
+  backend:
+    container_name: backend
     depends_on: 
       - mongo
     image: mcr.microsoft.com/dotnet/core/sdk:2.2

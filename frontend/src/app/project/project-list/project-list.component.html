@@ -38,7 +38,7 @@
       <tr mat-row *matRowDef="let row; columns: cols;" (click)="select(row)" [ngClass]="{'selected': selected == row}"></tr>
     </table>
     <mat-card fxFlex="40%" *ngIf="selected">
-      <p class="head">Eigenschaten</p>
+      <p class="head">Eigenschaften</p>
       <mat-divider></mat-divider>
       <form #fEdit [formGroup]="formEdit" (ngSubmit)="update()" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="5px">
         <mat-form-field>

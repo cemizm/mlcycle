@@ -22,16 +22,16 @@ interface Metric {
   styleUrls: ['./job.component.scss']
 })
 export class JobComponent implements OnInit, OnDestroy {
-  private job:Job;
-  private metrics:Array<Metric>
+  public job:Job;
+  public metrics:Array<Metric>
 
   private updateTimer;
 
-  private time_data:SingleDataSet;
-  private time_labels:Label[];
-  private chartType: ChartType = 'doughnut';
-  private chartOptions: ChartOptions = { maintainAspectRatio: false }
-  private chartColors = [{backgroundColor: ["#e84351", "#434a54", "#3ebf9b", "#4d86dc", "#f3af37"]}]
+  public time_data:SingleDataSet;
+  public time_labels:Label[];
+  public chartType: ChartType = 'doughnut';
+  public chartOptions: ChartOptions = { maintainAspectRatio: false }
+  public chartColors = [{backgroundColor: ["#e84351", "#434a54", "#3ebf9b", "#4d86dc", "#f3af37"]}]
 
   constructor(private route: ActivatedRoute,
               private router: Router,

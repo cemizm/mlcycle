@@ -28,6 +28,18 @@ services:
       - 5000:5000
       - 5001:5001
     command: dotnet run --project Backend.WebApi
+    restart: always 
+
+  production:
+    container_name: production
+    depends_on:
+      - backend
+    build: 
+      context: .
+      dockerfile: dockerfiles/nginx.dockerfile
+    ports:
+      - 8080:80
+    restart: always 
   
   mongo-express:
     container_name: mongo-express
@@ -40,4 +52,5 @@ services:
   mongo:
     container_name: mongo
     image: mongo
+    restart: always 
 

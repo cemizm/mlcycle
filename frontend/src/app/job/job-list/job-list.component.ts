@@ -13,13 +13,13 @@ import { map } from 'rxjs/operators';
 export class JobListComponent implements OnInit {
   private allJobs:Array<Job>;
 
-  private states:Array<any>;
-  private projects:Array<Project>;
+  public states:Array<any>;
+  public projects:Array<Project>;
 
-  private state:ProcessingState;
-  private project:Project;
+  public state:ProcessingState;
+  public project:Project;
 
-  private jobs:Array<Job>;
+  public jobs:Array<Job>;
 
   constructor(private jobService:JobService) {
     this.projects = new Array<Project>();

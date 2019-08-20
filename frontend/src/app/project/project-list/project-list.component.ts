@@ -14,7 +14,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
   styleUrls: ['./project-list.component.scss']
 })
 export class ProjectListComponent implements OnInit {
-  private projects:MatTableDataSource<Project>;
+  public projects:MatTableDataSource<Project>;
 
   @ViewChild(MatSort, {static: true})
   sort: MatSort;
@@ -25,12 +25,12 @@ export class ProjectListComponent implements OnInit {
   @ViewChild("fNew", {static:true})
   fNew: ElementRef;
 
-  private selected:Project;
+  public selected:Project;
 
-  private formNew:FormGroup;
-  private formEdit:FormGroup;
+  public formNew:FormGroup;
+  public formEdit:FormGroup;
 
-  private cols: string[] = ['name', 'actions'];
+  public cols: string[] = ['name', 'actions'];
 
   constructor(private service:ProjectService,
               private jobService:JobService,
@@ -58,7 +58,7 @@ export class ProjectListComponent implements OnInit {
     });
   }
 
-  create(form) {
+  create() {
     let value:Project = this.formNew.value;
     this.formNew.disable();
     this.service.add(value).subscribe((project) => {

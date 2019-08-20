@@ -11,9 +11,9 @@ import { FragmentService } from '../fragment.service';
 export class FragmentComponent implements OnInit {
   private _fragment:Fragment;
   private type:number;
-  private content:string;
-  private loading:boolean;
-  
+  public content:string;
+  public loading:boolean;
+
   constructor(private service:FragmentService) { }
 
   get fragment(): Fragment {
@@ -30,11 +30,11 @@ export class FragmentComponent implements OnInit {
     this.update();
   }
 
-  private isActive(type:number):boolean{
+  public isActive(type:number):boolean{
     return this.fragment && this.type == type;
   }
 
-  private getUrl():string {
+  public getUrl():string {
     return this.service.getUrl(this.fragment.id);
   }
 
@@ -61,7 +61,7 @@ export class FragmentComponent implements OnInit {
       case '.txt':
         this.type = -1;
         this.loading = true;
-        this.service.getContent(this.fragment.id).subscribe(content => { 
+        this.service.getContent(this.fragment.id).subscribe(content => {
           this.type = ext == ".csv" ? 2 : 3;
           this.content = content;
           this.loading = false;

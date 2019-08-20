@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./fragment-table.component.scss']
 })
 export class FragmentTableComponent implements OnInit {
-  private data:Array<Array<string>>;
+  public data:Array<Array<string>>;
 
   constructor() { }
 

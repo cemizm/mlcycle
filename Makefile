@@ -20,6 +20,10 @@ backend.cli:
 scheduler:
 	docker-compose up -d --build backend frontend
 
+.PHONY: production
+production:
+	docker-compose up -d --build production
+
 .PHONY: mongo-express
 mongo-express:
 	docker-compose up -d mongo-express

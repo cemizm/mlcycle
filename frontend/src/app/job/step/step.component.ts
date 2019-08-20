@@ -8,7 +8,7 @@ import { Step, Fragment } from '../job.models';
 })
 export class StepComponent implements OnInit {
   @Input() step:Step;
-  private selectedFragment:Fragment;
+  public selectedFragment:Fragment;
 
   constructor() { }
 

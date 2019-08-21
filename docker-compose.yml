@@ -30,10 +30,19 @@ services:
     command: dotnet run --project Backend.WebApi
     restart: always 
 
-  production:
-    container_name: production
+  backend.prod:
+    container_name: backend.prod
     depends_on:
-      - backend
+      - mongo
+    build: 
+      context: .
+      dockerfile: dockerfiles/backend.dockerfile
+    restart: always 
+
+  frontend.prod:
+    container_name: frontend.prod
+    depends_on:
+      - backend.prod
     build: 
       context: .
       dockerfile: dockerfiles/nginx.dockerfile
